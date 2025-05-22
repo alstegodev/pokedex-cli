@@ -14,12 +14,10 @@ export class Cache {
     }
 
     add<T>(key: string, value: T) {
-        console.log("ADD", key)
         this.cache.set(key, {createdAt: Date.now(), value})
     }
 
     get<T>(key: string): T | undefined {
-        console.log("GET", key)
         return this.cache.get(key)?.value
     }
 

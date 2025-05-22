@@ -20,7 +20,7 @@ export function startREPL(state: State) {
             let commandString = cleanStringArray[0];
             let cliCommand = getCommands()[commandString]
             if(cliCommand){
-                await cliCommand.callback(state)
+                await cliCommand.callback(state, ...cleanStringArray.slice(1))
             } else {
                 console.log("Command not found")
             }

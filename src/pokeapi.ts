@@ -7,7 +7,7 @@ export class PokeAPI {
     private cache: Cache
 
     constructor() {
-        this.cache = new Cache(10000)
+        this.cache = new Cache(1000 * 60 * 60)
     }
 
     async fetchLocations(pageURL?: string): Promise<ShallowLocations> {
@@ -20,19 +20,32 @@ export class PokeAPI {
             return this.cache.get(url) as ShallowLocations;
         }
 
-        try {
-            const response = await fetch(url)
+        const response = await fetch(url)
 
-            this.validateResponse(response, PokeAPI.LOCATIONS_ENDPOINT);
+        this.validateResponse(response, PokeAPI.LOCATIONS_ENDPOINT);
 
-            const result = await response.json()
-            this.cache.add(url, result)
+        const result = await response.json()
+        this.cache.add(url, result)
 
-            return result
-        } catch (error) {
-            console.error(`Error fetching locations: ${error}`)
-            return Promise.reject(error)
+        return result
+    }
+
+    async fetchLocation(locationName: string): Promise<detailedLocation> {
+        let url = PokeAPI.baseURL + PokeAPI.LOCATIONS_ENDPOINT + locationName;
+
+        if (this.cache.get(url)) {
+            console.log("Cache hit")
+            return this.cache.get(url) as detailedLocation;
         }
+
+        const response = await fetch(url)
+
+        this.validateResponse(response, PokeAPI.LOCATIONS_ENDPOINT);
+
+        const result = await response.json()
+        this.cache.add(url, result)
+
+        return result
     }
 
     private validateResponse(response: Response, endpoint: string): void {
@@ -40,9 +53,6 @@ export class PokeAPI {
             throw new Error(`Failed to fetch from ${endpoint}. Status: ${response.status}`);
         }
     }
-
-
-    // async fetchLocation(locationName: string): Promise<Location> {}
 
 }
 
@@ -56,4 +66,22 @@ export type ShallowLocations = {
 export type Location = {
     name: string;
     url: string;
+}
+
+export type detailedLocation = {
+    encounter_method_rates: [];
+    game_index: number;
+    id: number;
+    location: Location;
+    name: string;
+    names: [];
+    pokemon_encounters: PokemonEncounter[];
+}
+
+export type PokemonEncounter = {
+    pokemon: {
+        name: string;
+        url: string;
+    };
+    version_details: [];
 }
