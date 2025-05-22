@@ -1,0 +1,29 @@
+{
+  "name": "pokedex-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "npx tsc",
+    "start": "node dist/main.js",
+    "dev": "npx tsc && node dist/main.js",
+    "test": "vitest --run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alstegodev/pokedex-cli.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/alstegodev/pokedex-cli/issues"
+  },
+  "homepage": "https://github.com/alstegodev/pokedex-cli#readme",
+  "devDependencies": {
+    "@types/node": "^22.15.21",
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.4"
+  }
+}
