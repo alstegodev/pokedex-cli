@@ -1,6 +1,7 @@
 import * as readline from "node:readline";
 import {getCommands} from "./commands/commands.js";
 import {PokeAPI} from "./pokeapi/pokeapi.js";
+import {detailedPokemon} from "./pokeapi/types";
 
 export type CLICommand = {
     name: string;
@@ -15,7 +16,8 @@ export type State = {
     location: {
         nextLocationsURL: string;
         prevLocationsUrl: string;
-    }
+    };
+    catched: Record<string, detailedPokemon>
 }
 
 export function initState(): State {
@@ -29,6 +31,7 @@ export function initState(): State {
         location: {
             nextLocationsURL: "",
             prevLocationsUrl: "",
-        }
+        },
+        catched: {}
     }
 }
