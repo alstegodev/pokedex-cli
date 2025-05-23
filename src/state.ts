@@ -1,6 +1,6 @@
 import * as readline from "node:readline";
 import {getCommands} from "./commands/commands.js";
-import {PokeAPI} from "./pokeapi.js";
+import {PokeAPI} from "./pokeapi/pokeapi.js";
 
 export type CLICommand = {
     name: string;
