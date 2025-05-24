@@ -1,5 +1,5 @@
 import {Cache} from "../pokecache.js";
-import {detailedLocation, detailedPokemon, ShallowLocations} from "./types";
+import {DetailedLocation, DetailedPokemon, ShallowLocations} from "./types";
 
 export class PokeAPI {
     private static readonly baseURL = "https://pokeapi.co/api/v2";
@@ -20,13 +20,13 @@ export class PokeAPI {
         return this.fetchData(url)
     }
 
-    async fetchDetailedLocation(locationName: string): Promise<detailedLocation> {
+    async fetchDetailedLocation(locationName: string): Promise<DetailedLocation> {
         let url = PokeAPI.baseURL + PokeAPI.LOCATIONS_ENDPOINT + locationName;
 
         return this.fetchData(url)
     }
 
-    async fetchDetailedPokemon(pokemonName: string): Promise<detailedPokemon> {
+    async fetchDetailedPokemon(pokemonName: string): Promise<DetailedPokemon> {
         let url = PokeAPI.baseURL + PokeAPI.POKEMON_ENDPOINT + pokemonName;
 
         return this.fetchData(url)

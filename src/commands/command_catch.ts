@@ -1,5 +1,5 @@
 import {State} from "../state";
-import {detailedPokemon} from "../pokeapi/types";
+import {DetailedPokemon} from "../pokeapi/types";
 
 export async function commandCatch(state: State, pokemon: string) {
     if(!pokemon) {
@@ -16,7 +16,7 @@ export async function commandCatch(state: State, pokemon: string) {
     }
 }
 
-function throwPokeball(pokemonData: detailedPokemon, state: State) {
+function throwPokeball(pokemonData: DetailedPokemon, state: State) {
 
     if(catchPokemon(pokemonData.base_experience)){
         console.log(`Caught ${pokemonData.name}`)
